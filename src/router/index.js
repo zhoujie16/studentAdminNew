@@ -131,6 +131,20 @@ export const constantRouterMap = [
 			}
 		]
 	},
+	
+	//用户管理
+	{
+		path: '/user',
+		component: Layout,
+		children: [
+			{
+				path: 'index',
+				name: 'UserManage',
+				component: () => import('@/pages/UserManage/index'),
+				meta: { title: '用户管理', icon: 'form' }
+			}
+		]
+	},
 ]
 
 export default new Router({
