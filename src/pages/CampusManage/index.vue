@@ -23,9 +23,9 @@
                             type="danger" size="mini" icon="el-icon-delete"></el-button>
                     </template>
                 </el-table-column>
-                <el-table-column prop="campusName" label="校区名称" width=""></el-table-column>
+                <el-table-column prop="name" label="校区名称" width=""></el-table-column>
                 <el-table-column prop="openDate" label="创办时间" width=""></el-table-column>
-                <el-table-column prop="colseDate" label="停办时间" width=""></el-table-column>
+                <el-table-column prop="closeDate" label="停办时间" width=""></el-table-column>
                 <el-table-column prop="leaderName" label="负责人" width=""></el-table-column>
                 <el-table-column prop="seq" label="排列序号" width=""></el-table-column>
             </el-table>
@@ -33,7 +33,7 @@
         <el-dialog :title="dialogMark=='add'?'添加校区':'编辑校区'" :visible.sync="dialogVisible">
             <el-form :model="addCampusForm" label-width="100px" label-position="right" size="small">
                 <el-form-item label="校区名称">
-                    <el-input v-model="addCampusForm.campusName"></el-input>
+                    <el-input v-model="addCampusForm.name"></el-input>
                 </el-form-item>
                 <el-form-item label="创办时间">
                     <el-date-picker v-model="addCampusForm.openDate" value-format="yyyy-MM-dd" type="date" placeholder="选择日期">
@@ -73,7 +73,7 @@
                 dialogMark: "",
                 //新增校区表单提交 
                 addCampusForm: {
-                    "campusName": "",
+                    "name": "",
                     "openDate": "",
                     "colseDate": "",
                     "leaderName": "",
@@ -104,7 +104,7 @@
             addCampusClick() {
                 this.dialogMark = "add";
                 this.addCampusForm = {
-                    "campusName": "",
+                    "name": "",
                     "openDate": "",
                     "colseDate": "",
                     "leaderName": "",

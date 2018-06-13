@@ -6,7 +6,7 @@ import { showLoading,closeLoading } from '@/utils/loading';
 
 // create an axios instance
 const service = axios.create({
-  //baseURL: process.env.BASE_API, // api的base_url http://101.201.196.132/school_webapi
+//  baseURL: process.env.BASE_API, // api的base_url http://101.201.196.132/school_webapi
 	baseURL: 'http://101.201.196.132/school_webapi',
   timeout: 5000 // request timeout
 })

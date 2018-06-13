@@ -7,13 +7,13 @@
 				<el-form-item label="校区">
 					<el-select v-model="queryStudentForm.campusId" placeholder="请选择校区">
 						<el-option label="全部" :value="null"></el-option>
-						<el-option v-for="(item,i) in campusList" :label="item.campusName" :value="item.campusId"></el-option>
+						<el-option v-for="(item,i) in campusList" :label="item.campusId" :value="item.campusId"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="学届">
-					<el-select v-model="queryStudentForm.gradeYear" placeholder="请选择学届">
+					<el-select v-model="queryStudentForm.gradeId" placeholder="请选择学届">
 						<el-option label="全部" :value="null"></el-option>
-						<el-option v-for="(item,i) in gradeList" :label="item.gradeName" :value="item.gradeYear"></el-option>
+						<el-option v-for="(item,i) in gradeList" :label="item.gradeId" :value="item.gradeId"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="班级(班)">
@@ -25,7 +25,7 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item label="校友姓名">
-					<el-input v-model="queryStudentForm.stuName"></el-input>
+					<el-input v-model="queryStudentForm.name"></el-input>
 				</el-form-item>
 				<el-form-item size="small">
 					<el-button type="primary" @click="queryStudentAction">查询</el-button>
@@ -42,10 +42,10 @@
 						<el-button @click="delStudentClick(scope)" class="icon-btn-del" type="danger" size="mini" icon="el-icon-delete"></el-button>
 					</template>
 				</el-table-column>
-				<el-table-column prop="campusName" label="所属校区" width=""></el-table-column>
-				<el-table-column prop="gradeName" label="学届" width=""></el-table-column>
+				<el-table-column prop="campusId" label="所属校区" width=""></el-table-column>
+				<el-table-column prop="gradeId" label="学届" width=""></el-table-column>
 				<el-table-column prop="className" label="班级" width=""></el-table-column>
-				<el-table-column prop="stuName" label="姓名" width=""></el-table-column>
+				<el-table-column prop="name" label="姓名" width=""></el-table-column>
 				<el-table-column label="状态" width="">
 					<template slot-scope="scope">
 						{{scope.row.activeStatus==1?'已激活':'未激活'}}
@@ -63,15 +63,15 @@
 				<el-row>
 					<el-col :span="12">
 						<el-form-item label="所属校区">
-							<el-select @change="editCampusChange" v-model="editStudentForm.campusName" placeholder="请选择校区">
-								<el-option v-for="(item,i) in campusList" :label="item.campusName" :value="item.campusName"></el-option>
+							<el-select @change="editCampusChange" v-model="editStudentForm.campusId" placeholder="请选择校区">
+								<el-option v-for="(item,i) in campusList" :label="item.campusId" :value="item.campusId"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="学届">
-							<el-select @change="editGradeChange" v-model="editStudentForm.gradeYear" placeholder="请选择学届">
-								<el-option v-for="(item,i) in gradeList" :label="item.gradeName" :value="item.gradeYear"></el-option>
+							<el-select @change="editGradeChange" v-model="editStudentForm.gradeId" placeholder="请选择学届">
+								<el-option v-for="(item,i) in gradeList" :label="item.gradeId" :value="item.gradeId"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -84,7 +84,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="姓名">
-							<el-input v-model="editStudentForm.stuName"></el-input>
+							<el-input v-model="editStudentForm.name"></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
@@ -168,18 +168,18 @@
 					"pageNum": 1,
 					"pageSize": 10,
 					"campusId": null,
-					"gradeYear": null,
+					"gradeId": null,
 					"className": null,
 					"activeStatus": null,
-					"stuName": null
+					"name": null
 				},
 				// 新增校友
 				editStudentForm: {
 					txt: null,
 					campusId: null,
-					gradeYear: null,
+					gradeId: null,
 					classId: null,
-					stuName: null,
+					name: null,
 					sex: null,
 					activeStatus: null,
 					nickname: null
@@ -262,9 +262,9 @@
 				this.editStudentForm = {
 					txt: null,
 					campusId: null,
-					gradeYear: null,
+					gradeId: null,
 					classId: null,
-					stuName: null,
+					name: null,
 					sex: null,
 					activeStatus: null,
 					nickname: null
@@ -296,7 +296,7 @@
 			editStudentAction() {
 				console.log(this.editStudentForm,this.campusList);
 				this.campusList.forEach((item,i)=>{
-					if (item.campusName == this.editStudentForm.campusName) {
+					if (item.campusId == this.editStudentForm.campusId) {
 						console.log('xsss')
 						this.editStudentForm.campusId = item.campusId;
 					}
@@ -304,9 +304,9 @@
 				var params = {
 					stuId : this.editStudentForm.stuId,
 					campusId : this.editStudentForm.campusId,
-					gradeYear : this.editStudentForm.gradeYear,
+					gradeId : this.editStudentForm.gradeId,
 					classId : this.editStudentForm.classId,
-					stuName : this.editStudentForm.stuName,
+					name : this.editStudentForm.name,
 					sex : this.editStudentForm.sex,
 					activeStatus : this.editStudentForm.activeStatus,
 					nickname : this.editStudentForm.nickname,
@@ -391,7 +391,7 @@
 			editCampusChange(val) {
 				console.log('校区改变')
 				this.editStudentForm.classId = null;
-				if(this.editStudentForm.gradeYear) {
+				if(this.editStudentForm.gradeId) {
 					this.queryClassOption();
 				}
 
@@ -399,17 +399,17 @@
 			editGradeChange(val) {
 				console.log('学届改变')
 				this.editStudentForm.classId = null;
-				if(this.editStudentForm.campusName) {
+				if(this.editStudentForm.campusId) {
 					this.queryClassOption();
 				}
 			},
 			queryClassOption() {
 				var  params = {
 					campusId: this.editStudentForm.campusId,
-					gradeYear: this.editStudentForm.gradeYear
+					gradeId: this.editStudentForm.gradeId
 				}
 				this.campusList.forEach((item,i)=>{
-					if (item.campusName == this.editStudentForm.campusName) {
+					if (item.campusId == this.editStudentForm.campusId) {
 						console.log('xsss')
 						params.campusId = item.campusId;
 					}
@@ -430,9 +430,9 @@
 					addStudent({
 						txt: null,
 						campusId: 7,
-						gradeYear: 1991,
+						gradeId: 1991,
 						classId: 21,
-						stuName: '测试姓名'+i,
+						name: '测试姓名'+i,
 						sex: 0,
 						activeStatus: null,
 						nickname: '测试外号'+i

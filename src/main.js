@@ -19,6 +19,7 @@ import './mock' // simulation data
 
 import * as filters from './filters' // global filters
 
+import mock from './mock/mock.js'
 window._log = console.log;
 
 Vue.use(Element, {

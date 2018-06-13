@@ -3,7 +3,7 @@ import request from '@/utils/request'
 
 export function queryCampus(){
 	return request({
-		url: '/campus',
+		url: '/campus/list',
 		method: 'get'
 	})
 }

@@ -11,16 +11,16 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item label="学届">
-					<el-select v-model="queryClassForm.gradeYear" placeholder="请选择学届">
+					<el-select v-model="queryClassForm.gradeId" placeholder="请选择学届">
 						<el-option label="全部" :value="null"></el-option>
-						<el-option v-for="(item,i) in gradeList" :label="item.gradeName" :value="item.gradeYear"></el-option>
+						<el-option v-for="(item,i) in gradeList" :label="item.gradeName" :value="item.gradeId"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="班级(班)">
 					<el-input v-model="queryClassForm.className"></el-input>
 				</el-form-item>
 				<el-form-item label="班主任">
-					<el-input v-model="queryClassForm.headTeacherName"></el-input>
+					<el-input v-model="queryClassForm.tchName"></el-input>
 				</el-form-item>
 				<el-form-item size="small">
 					<el-button type="primary" @click="queryClassAction">查询</el-button>
@@ -37,9 +37,9 @@
 					</template>
 				</el-table-column>
 				<el-table-column prop="campusId" label="所属校区" width=""></el-table-column>
-				<el-table-column prop="gradeYear" label="学届" width=""></el-table-column>
+				<el-table-column prop="gradeId" label="学届" width=""></el-table-column>
 				<el-table-column prop="className" label="班级" width=""></el-table-column>
-				<el-table-column prop="headTeacherName" label="班主任" width=""></el-table-column>
+				<el-table-column prop="tchName" label="班主任" width=""></el-table-column>
 			</el-table>
 			<div class="pagination" style="margin-top: 10px;">
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total">
@@ -56,19 +56,19 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item label="学届">
-					<el-select v-model="editClassForm.gradeYear" placeholder="请选择学届">
+					<el-select v-model="editClassForm.gradeId" placeholder="请选择学届">
 						<el-option label="全部" :value="null"></el-option>
-						<el-option v-for="(item,i) in gradeList" :label="item.gradeName" :value="item.gradeYear"></el-option>
+						<el-option v-for="(item,i) in gradeList" :label="item.gradeName" :value="item.gradeId"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="班级" prop="className" :rules="[{ required: true, message: '班级不能为空'}]">
 					<el-input placeholder="必填" v-model="editClassForm.className"></el-input>
 				</el-form-item>
 				<el-form-item label="班主任">
-					<el-input v-model="editClassForm.headTeacherName"></el-input>
+					<el-input v-model="editClassForm.tchName"></el-input>
 				</el-form-item>
 				<el-form-item label="班级寄语">
-					<el-input type="textarea" v-model="editClassForm.classMessage"></el-input>
+					<el-input type="textarea" v-model="editClassForm.message"></el-input>
 				</el-form-item>
 			</el-form>
 			<span slot="footer" class="dialog-footer">
@@ -102,17 +102,17 @@
 				// 查询
 				queryClassForm: {
 					"campusId": null,
-					"gradeYear": null,
+					"gradeId": null,
 					"className": null,
-					"headTeacherName": null
+					"tchName": null
 				},
 				// 新增 编辑
 				editClassForm: {
 					"campusId": "",
-					"gradeYear": "",
+					"gradeId": "",
 					"className": "",
-					"headTeacherName": "",
-					"classMessage": ""
+					"tchName": "",
+					"message": ""
 				},
 				// 删除班级
 				delClassForm: {
@@ -187,10 +187,10 @@
 				this.dialogMark = 'add';
 				this.editClassForm = {
 					"campusId": "",
-					"gradeYear": "",
+					"gradeId": "",
 					"className": "",
-					"headTeacherName": "",
-					"classMessage": ""
+					"tchName": "",
+					"message": ""
 				};
 			},
 			addClassAction() {
